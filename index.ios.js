@@ -6,12 +6,12 @@ class ReactNativeStopwatch extends Component {
     return (
       <View style={styles.container}>
         <View style={[styles.header, this.border('yellow')]}>
-          <View style={this.border('red')}>
+          <View style={[styles.timerWrapper, this.border('red')]}>
             <Text>
               00:00:00
             </Text>
           </View>
-          <View style={this.border('green')}>
+          <View style={[styles.buttonWrapper, this.border('green')]}>
             {this.startStopButton()}
             {this.lapButton()}
           </View>
@@ -64,6 +64,17 @@ const styles = StyleSheet.create({
   },
   footer: {
     flex: 1
+  },
+  timerWrapper: {
+    flex: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttonWrapper: {
+    flex: 3,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   }
 })
 
