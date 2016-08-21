@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AppRegistry, StyleSheet, Text, View } from 'react-native'
+import { AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native'
 
 class ReactNativeStopwatch extends Component {
   render () {
@@ -28,12 +28,16 @@ class ReactNativeStopwatch extends Component {
 
   startStopButton () {
     return (
-      <View>
+      <TouchableHighlight underlayColor='gray' onPress={this.handleStartPress}>
         <Text>
           Start
         </Text>
-      </View>
+      </TouchableHighlight>
     )
+  }
+
+  handleStartPress () {
+    console.log('Start was pressed')
   }
 
   lapButton () {
