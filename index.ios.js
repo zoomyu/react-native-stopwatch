@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native'
+import formatTime from 'minutes-seconds-milliseconds'
 
 class ReactNativeStopwatch extends Component {
   constructor (props) {
@@ -7,6 +8,7 @@ class ReactNativeStopwatch extends Component {
     this.state = {
       timeElapsed: null
     }
+    this.handleStartPress = this.handleStartPress.bind(this)
   }
 
   render () {
@@ -15,7 +17,7 @@ class ReactNativeStopwatch extends Component {
         <View style={[styles.header, this.border('yellow')]}>
           <View style={[styles.timerWrapper, this.border('red')]}>
             <Text>
-              00:00:00
+              {formatTime(this.state.timeElapsed)}
             </Text>
           </View>
           <View style={[styles.buttonWrapper, this.border('green')]}>
@@ -46,9 +48,11 @@ class ReactNativeStopwatch extends Component {
   handleStartPress () {
     const startTime = new Date()
 
-    this.setState({
-      timeElapsed: new Date() - startTime
-    })
+    setInterval(() => {
+      this.setState({
+        timeElapsed: new Date() - startTime
+      })
+    }, 30)
   }
 
   lapButton () {
