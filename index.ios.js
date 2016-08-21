@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import { AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native'
 
 class ReactNativeStopwatch extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      timeElapsed: null
+    }
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -37,7 +44,11 @@ class ReactNativeStopwatch extends Component {
   }
 
   handleStartPress () {
-    console.log('Start was pressed')
+    const startTime = new Date()
+
+    this.setState({
+      timeElapsed: new Date() - startTime
+    })
   }
 
   lapButton () {
