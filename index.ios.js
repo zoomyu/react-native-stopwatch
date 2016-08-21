@@ -39,11 +39,11 @@ class ReactNativeStopwatch extends Component {
 
   laps () {
     return this.state.laps.map((time, index) => (
-      <View key={index}>
-        <Text>
+      <View key={index} style={styles.lap}>
+        <Text style={styles.lapText}>
           Lap #{index + 1}
         </Text>
-        <Text>
+        <Text style={styles.lapText}>
           {formatTime(time)}
         </Text>
       </View>
@@ -141,6 +141,13 @@ const styles = StyleSheet.create({
   },
   stopButton: {
     borderColor: '#CC0000'
+  },
+  lap: {
+    justifyContent: 'space-around',
+    flexDirection: 'row'
+  },
+  lapText: {
+    fontSize: 30
   }
 })
 
