@@ -8,7 +8,8 @@ class ReactNativeStopwatch extends Component {
     this.state = {
       timeElapsed: null,
       running: false,
-      startTime: null
+      startTime: null,
+      laps: []
     }
     this.handleStartPress = this.handleStartPress.bind(this)
     this.handleLapPress = this.handleLapPress.bind(this)
@@ -30,12 +31,23 @@ class ReactNativeStopwatch extends Component {
         </View>
 
         <View style={styles.footer}>
-          <Text>
-            I am a list of Laps
-          </Text>
+          {this.laps()}
         </View>
       </View>
     )
+  }
+
+  laps () {
+    return this.state.laps.map((time, index) => (
+      <View key={index}>
+        <Text>
+          Lap #{index + 1}
+        </Text>
+        <Text>
+          {formatTime(time)}
+        </Text>
+      </View>
+    ))
   }
 
   startStopButton () {
@@ -84,7 +96,10 @@ class ReactNativeStopwatch extends Component {
   handleLapPress () {
     const lap = this.state.timeElapsed
 
-    this.setState({startTime: new Date()})
+    this.setState({
+      startTime: new Date(),
+      laps: this.state.laps.concat([lap])
+    })
   }
 }
 
