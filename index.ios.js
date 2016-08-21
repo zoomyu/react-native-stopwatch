@@ -2,6 +2,30 @@ import React, { Component } from 'react'
 import { AppRegistry, StyleSheet, Text, View } from 'react-native'
 
 class ReactNativeStopwatch extends Component {
+  render () {
+    return (
+      <View style={styles.container}>
+        <View style={[styles.header, this.border('yellow')]}>
+          <View style={this.border('red')}>
+            <Text>
+              00:00:00
+            </Text>
+          </View>
+          <View style={this.border('green')}>
+            {this.startStopButton()}
+            {this.lapButton()}
+          </View>
+        </View>
+
+        <View style={[styles.footer, this.border('blue')]}>
+          <Text>
+            I am a list of Laps
+          </Text>
+        </View>
+      </View>
+    )
+  }
+
   startStopButton () {
     return (
       <View>
@@ -22,28 +46,11 @@ class ReactNativeStopwatch extends Component {
     )
   }
 
-  render () {
-    return (
-      <View>
-        <View>
-          <View>
-            <Text>
-              00:00:00
-            </Text>
-          </View>
-          <View>
-            {this.startStopButton()}
-            {this.lapButton()}
-          </View>
-        </View>
-
-        <View>
-          <Text>
-            I am a list of Laps
-          </Text>
-        </View>
-      </View>
-    )
+  border (color) {
+    return {
+      borderColor: color,
+      borderWidth: 4
+    }
   }
 }
 
