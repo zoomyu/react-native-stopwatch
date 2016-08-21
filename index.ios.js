@@ -6,7 +6,8 @@ class ReactNativeStopwatch extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      timeElapsed: null
+      timeElapsed: null,
+      running: false
     }
     this.handleStartPress = this.handleStartPress.bind(this)
   }
@@ -36,26 +37,35 @@ class ReactNativeStopwatch extends Component {
   }
 
   startStopButton () {
+    const buttonStyle = this.state.running ? styles.stopButton : styles.startButton
+
     return (
       <TouchableHighlight
         underlayColor='gray'
         onPress={this.handleStartPress}
-        style={[styles.button, styles.startButton]}>
+        style={[styles.button, buttonStyle]}>
         <Text>
-          Start
+          {this.state.running ? 'Stop' : 'Start'}
         </Text>
       </TouchableHighlight>
     )
   }
 
   handleStartPress () {
-    const startTime = new Date()
-
-    setInterval(() => {
+    if (this.state.running) {
+      clearInterval(this.interval)
       this.setState({
-        timeElapsed: new Date() - startTime
+        running: false
       })
-    }, 30)
+    } else {
+      const startTime = new Date()
+      this.interval = setInterval(() => {
+        this.setState({
+          timeElapsed: new Date() - startTime,
+          running: true
+        })
+      }, 30)
+    }
   }
 
   lapButton () {
@@ -104,6 +114,9 @@ const styles = StyleSheet.create({
   },
   startButton: {
     borderColor: '#00CC00'
+  },
+  stopButton: {
+    borderColor: '#CC0000'
   }
 })
 
